@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Javascript</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+    <style>
+
+        .form {
+            margin-top: 50px;
+        }
+        .submit_button button{
+            width: 80%;
+            margin-left: 10%;
+            margin-top: 20px;
+        }
+        .marks{
+            margin-top: 20px;
+        }
+        .modify a{
+            text-decoration: none;
+        }
+        body
+{
+    counter-reset: Count-Value;     
+}
+table
+{
+    border-collapse: separate;
+}
+tr td:first-child:after
+{
+  counter-increment: Count-Value;   
+  content: "Row:" counter(Count-Value);
+}
+
+@media (max-width: 375px) {
+    body{
+        background-color: black;
+    }
+
+}
+    
+    </style>
+</head>
+<body onload="init()">
+    
+        <textarea id="textbox">Type something here</textarea> <button id="create">Create file</button> <a download="info.txt" id="downloadlink" style="display: none">Download</a>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+
+                <p id="hello" class="hello"></p>
+
+            </div>
+            <div class="col-md-6 form">
+                    <div class="form-group">
+                        <label for="usr">Student Name:</label>
+                        <input type="text" class="form-control" id="usr">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="english">English Marks:</label>
+                                <input type="number" class="form-control" id="english">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="telugu">Telugu Marks:</label>
+                                <input type="number" class="form-control" id="telugu">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="maths">Maths Marks:</label>
+                                <input type="number" class="form-control" id="maths">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="science">Science Marks:</label>
+                                <input type="number" class="form-control" id="science">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="social">Social Marks:</label>
+                                <input type="number" class="form-control" id="social">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="hindhi">Hindhi Marks:</label>
+                                <input type="number" class="form-control" id="hindhi">
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="submit_button">
+                        <button type="button" class="btn btn-primary" id="create" onClick="save()">Save</button>
+                    </div>    
+            </div>
+            <div class="col-md-3">
+
+            </div>
+        </div>
+        <div class="row marks">
+               
+                <div class="col-md-1">
+
+                </div>      
+                <div class="col-md-10"> 
+                    <h4>Candidate Marks</h4>
+                    <table class="table table-bordered table-responsive ">
+                     <thead>
+                       <tr>
+                        <th>S.No</th>  
+                        <th>Student Name</th>
+                        <th>English</th>
+                        <th>Telugu</th>
+                        <th>Maths</th>
+                        <th>Science</th>
+                        <th>Social</th>
+                        <th>Hindhi</th>
+                        <th>Total</th>
+                        <th>Grade</th>
+                        <th>Actions</th>
+                       </tr>
+                      </thead>
+                  <tbody>
+                    <tr>
+                       <td></td>
+                      <!--<td id="user_name">C Manikanta Kumar</td>
+                      <td id="e_marks">45</td>
+                      <td id="t_marks">43</td>
+                      <td id="m_marks">78</td>
+                      <td id="s_marks">89</td>
+                      <td id="so_marks">60</td>
+                      <td id="h_marks">70</td>
+                      <td id="result">400</td>
+                      <td>C Grade</td>-->
+                      <!-- <td class="modify">
+                          <a href="#" data-toggle="modal" data-target="#myModal">Edit</a>
+                          <a href="#">Delete</a>
+                      </td>  -->
+                    </tr>
+                  </tbody>
+                </table>
+                </div>
+                <div class="col-md-1">
+
+                </div>
+            </div>
+            <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog">
+                    
+                      <!-- Modal content-->
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h4 class="modal-title">Update Mark   s</h4>
+                        </div>
+                        <div class="modal-body" style="margin-top:-60px;">
+                                <div class="col-md-12 form">
+                                        <div class="form-group">
+                                            <label for="usr">Student Name:</label>
+                                            <input type="text" class="form-control" id="update_user_name">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="english">English Marks:</label>
+                                                    <input type="number" class="form-control" id="english">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="telugu">Telugu Marks:</label>
+                                                    <input type="number" class="form-control" id="telugu">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="maths">Maths Marks:</label>
+                                                    <input type="number" class="form-control" id="maths">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="science">Science Marks:</label>
+                                                    <input type="number" class="form-control" id="science">
+                                                </div>
+                                            </div>
+                                        </div>
+                                  
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="social">Social Marks:</label>
+                                                <input type="number" class="form-control" id="social">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="hindhi">Hindhi Marks:</label>
+                                                <input type="number" class="form-control" id="hindhi">
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </div>
+                                    <div class="submit_button">
+                                        <button type="button" class="btn btn-primary">Save</button>
+                                    </div>    
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                      
+                    </div>
+                  </div>
+        </div>
+    </div>
+
+
+    
+
+
+    <script>
+         var studentArray = [];
+
+         function init(){
+             if(localStorage.studentRecord){
+                 studentArray = JSON.parse(localStorage.studentRecord);
+                 alert(localStorage.studentRecord);
+                 for(i=0;i<studentArray.length;i++){
+                    prepareTableCell(studentArray[i].usr,studentArray[i].english,studentArray[i].telugu,
+                                    studentArray[i].maths,studentArray[i].science,studentArray[i].social,studentArray[i].hindhi,studentArray[i].total);
+
+                 }
+
+             }
+
+         }
+        
+   
+        function save(){
+            
+            var user = document.getElementById('usr').value;
+            var e = document.getElementById('english').value,
+            t = document.getElementById('telugu').value, 
+            m = document.getElementById('maths').value,
+            s = document.getElementById('science').value,
+            so = document.getElementById('social').value,
+            h = document.getElementById('hindhi').value;
+            var total = Number(e) + Number(t) + Number(m) + Number(s) + Number(so) + Number(h);
+            
+            var jsonObj = {usr:user,english:e,telugu:t,maths:m,science:s,social:so,hindhi:h,total:total};
+            studentArray.push(jsonObj);
+            // alert("hello");
+            console.log(studentArray);
+            localStorage.studentRecord = JSON.stringify(studentArray);
+            prepareTableCell(user,e,t,m,s,so,h,total);
+
+            
+
+
+
+           //Clearing field values after clicking on Register button//
+            document.getElementById('usr').value = "";
+            document.getElementById('english').value = "";
+            document.getElementById('telugu').value = "";
+            document.getElementById('maths').value = "";
+            document.getElementById('science').value = "";
+            document.getElementById('social').value = "";
+            document.getElementById('hindhi').value = "";
+
+        }
+        function prepareTableCell(user,e,t,m,s,so,h,total){
+            var table = document.getElementsByTagName('table')[0];
+            var newRow = table.insertRow(1);
+            var cell1 = newRow.insertCell(0);
+            var cell2 = newRow.insertCell(1);
+            var cell3 = newRow.insertCell(2);
+            var cell4 = newRow.insertCell(3);
+            var cell5 = newRow.insertCell(4);
+            var cell6 = newRow.insertCell(5);
+            var cell7 = newRow.insertCell(6);
+            var cell8 = newRow.insertCell(7);
+            var cell9 = newRow.insertCell(8);
+            var cell10 = newRow.insertCell(9);
+            var cell11 = newRow.insertCell(10);
+
+            cell2.innerHTML = user;
+            cell3.innerHTML = e;
+            cell4.innerHTML = t;
+            cell5.innerHTML = m;
+            cell6.innerHTML = s;
+            cell7.innerHTML = so;
+            cell8.innerHTML = h;
+            cell9.innerHTML = total;
+            cell11.innerHTML = '<a href="#" data-toggle="modal" data-target="#myModal">edit</a>' + '&nbsp;' + '&nbsp;' +'<a href="#">delete</a>';
+
+            
+            if((total > 300) && (total < 400)) {
+               cell10.innerHTML = "B Grade";
+            }else if((total > 400) && (total < 500)){
+                cell10.innerHTML = "A Grade"
+            }
+            else if((total > 500) && (total < 600)){
+                cell10.innerHTML = "O Grade"
+            }
+            else{
+                cell10.innerHTML = "horrible"
+            }
+            
+
+        }
+        (function () {
+var textFile = null,
+  makeTextFile = function (text) {
+    var data = new Blob([text], {type: 'text/plain'});
+
+    // If we are replacing a previously generated file we need to
+    // manually revoke the object URL to avoid memory leaks.
+    if (textFile !== null) {
+      window.URL.revokeObjectURL(textFile);
+    }
+
+    textFile = window.URL.createObjectURL(data);
+
+    return textFile;
+  };
+
+
+  var create = document.getElementById('create'),
+    textbox = document.getElementById('textbox');
+
+  create.addEventListener('click', function () {
+    var link = document.getElementById('downloadlink');
+    link.href = makeTextFile(textbox.value);
+    link.style.display = 'block';
+  }, false);
+})();
+
+
+    
+    </script>
+</body>
+
+</html>
